@@ -10,9 +10,9 @@
     
     {% for dct in room %}
         {% if dct.id == 2 %}
-            <h2>{{dct.id}}. for {{dct.name}}</h2>
+            <h2>{{dct.id}} --- {{dct.name}}</h2>
         {% else %}
-            <h1>{{dct.id}}. for {{dct.name}}</h1>
+            <h1>{{dct.id}} --- for {{dct.name}}</h1>
         {% endif %}
     {% endfor %}
 
