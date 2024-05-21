@@ -37,6 +37,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    
+    # I'm using base.app.BaseConfig to connect the app directly.
+    'base.apps.BaseConfig'
 ]
 
 MIDDLEWARE = [
