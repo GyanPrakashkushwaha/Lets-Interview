@@ -1,4 +1,5 @@
-from django.shortcuts import render , HttpResponse
+from django.shortcuts import render
+from .models import Room
 
 
 allRooms = [
@@ -9,6 +10,8 @@ allRooms = [
 
 # Create your views here.
 def home(request):
+    # data available in the dabase to get that we need to use this code.
+    allRooms = Room.objects.all()
     dictToPass = {"room": allRooms}
     
     return render(request=request,template_name="base/home.html",context=dictToPass)
@@ -18,10 +21,7 @@ def room(request,pk):
     """ to render the data into the page, I have to pass the data into the render method using a dictionary.
     I will only be able to get the data to the htlm page for rendering using the key of the dictionary. """
     
-    rm = None
-    for i in allRooms:
-        if i['id'] == int(pk):
-            rm = i
+    rm = Room.objects.get(id=pk)
             
     context = {"rm": rm}
     
