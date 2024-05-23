@@ -6,16 +6,7 @@
 
 <hr>
 
-<div>
-    
-    {% for dct in room %}
-        {% if dct.id == 2 %}
-            <h2>{{dct.id}} --- {{dct.name}}</h2>
-        {% else %}
-            <h1>{{dct.id}} --- for {{dct.name}}</h1>
-        {% endif %}
-    {% endfor %}
+<h1> {{rm.name}} </h1>
 
-</div>
 
 {% endblock content %}

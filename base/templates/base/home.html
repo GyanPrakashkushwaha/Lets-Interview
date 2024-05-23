@@ -4,4 +4,16 @@
 
 <h1> Hello there this is HOME</h1>
 
+
+<hr>
+
+<div>
+    
+    {% for dct in room %}
+        <h2>{{dct.id}} --- <a href="{% url 'room' dct.id %}">{{dct.name}}</a></h2>
+        
+    {% endfor %}
+
+</div>
+
 {% endblock content %}
