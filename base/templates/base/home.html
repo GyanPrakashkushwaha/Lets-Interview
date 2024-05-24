@@ -4,13 +4,20 @@
 
 <h1> Hello there this is HOME</h1>
 
-
 <hr>
 
 <div>
     
     {% for dct in room %}
-        <h2>{{dct.id}} --- <a href="{% url 'room' dct.id %}">{{dct.name}}</a></h2>
+        <span><b>@{{dct.host.get_username}}</b></span>
+        <h3>{{dct.id}} --- <a href="{% url 'room' dct.id %}">{{dct.name}}</a></h3>
+        <small> {{dct.topic}} </small>
+        <div>
+            <small> {{dct.description}} </small>
+        </div>
+        
+        <br>
+        <hr>
         
     {% endfor %}
 
