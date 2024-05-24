@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from .models import Room
+from .forms import RoomForm
 
 
 allRooms = [
@@ -27,3 +28,9 @@ def room(request,pk):
     
     # in html file I can do all the things I want using the "room" key.
     return render(request=request,template_name="base/room.html",context=context)
+
+
+def createRoom(request):
+    form_formate = RoomForm()
+    context = {'forms':form_formate}
+    return render(request=request,template_name='base/room_form.html',context=context)

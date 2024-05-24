@@ -4,9 +4,13 @@
 
 <h1> Hello there this is HOME</h1>
 
+<h2><a href="{% url 'createRoom' %}">Let's go to room✈🕊</a></h2>
+
+
 <hr>
 
 <div>
+
     
     {% for dct in room %}
         <span><b>@{{dct.host.get_username}}</b></span>
