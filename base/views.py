@@ -44,12 +44,15 @@ def createRoom(request):
 
 
 def updateRoom(request,pk):
-    room = Room.objects.get(id=pk) # by this I am extracting a single rooms value from the DB.
-    # To show the values prefilled we have to use `instance` parameter.
+    room = Room.objects.get(id=pk)
+    form = RoomForm(instance=room)
+    
     if request.method == 'POST':
-        form = RoomForm(instance=room)
+        form = RoomForm(request.POST,instance=room)
+        if form.is_valid():
+            form.save()
+            return redirect('home')
     
-    context={'form':form}
-    
+    context = {'form':form}
     return render(request=request,template_name='base/room_form.html',context=context)
     
