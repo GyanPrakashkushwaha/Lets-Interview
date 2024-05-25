@@ -55,4 +55,12 @@ def updateRoom(request,pk):
     
     context = {'form':form}
     return render(request=request,template_name='base/room_form.html',context=context)
+
+def deleteRoom(request,pk):
+    room = Room.objects.get(id=pk)
+    
+    if request.method == 'POST':
+        room.delete()
+    context = {'obj':room}
+    return render(request=request,template_name='base/delete.html',context=context)
     
