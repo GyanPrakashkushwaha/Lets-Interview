@@ -14,7 +14,7 @@
     
     {% for dct in room %}
 
-        <a href="{% url 'delete-room' %}">DELETE</a>
+        <a href="{% url 'delete-room' dct.id %}">DELETE</a>
         <a href="{% url 'update-room' dct.id  %}"> edit</a>
         <span><b>@{{dct.host.get_username}}</b></span>
         <h3>{{dct.id}} --- <a href="{% url 'room' dct.id %}">{{dct.name}}</a></h3>
