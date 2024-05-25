@@ -22,6 +22,10 @@ class Room(models.Model):
     def __str__(self):
         return self.name
     
+    # To change the order we can use this.
+    class Meta:
+        ordering = ['-updated','-created']
+    
     
 class Message(models.Model):
     """ This class is going to be a message creator."""

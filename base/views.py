@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render , redirect
 from .models import Room
 from .forms import RoomForm
 
@@ -32,5 +32,24 @@ def room(request,pk):
 
 def createRoom(request):
     form_formate = RoomForm()
+    if request.method == 'POST':
+        form_formate = RoomForm(request.POST) # parsing all the values.
+        print(request.POST)
+        if form_formate.is_valid:
+            form_formate.save() # this is saving the forms value to the DB
+            return redirect(to='home') # if the form is sucessfully saved then I will be redirected to home page.
+            
     context = {'forms':form_formate}
     return render(request=request,template_name='base/room_form.html',context=context)
+
+
+def updateRoom(request,pk):
+    room = Room.objects.get(id=pk) # by this I am extracting a single rooms value from the DB.
+    # To show the values prefilled we have to use `instance` parameter.
+    if request.method == 'POST':
+        form = RoomForm(instance=room)
+    
+    context={'form':form}
+    
+    return render(request=request,template_name='base/room_form.html',context=context)
+    
