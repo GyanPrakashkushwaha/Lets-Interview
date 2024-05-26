@@ -39,7 +39,7 @@ def createRoom(request):
             form_formate.save() # this is saving the forms value to the DB
             return redirect(to='home') # if the form is sucessfully saved then I will be redirected to home page.
             
-    context = {'forms':form_formate}
+    context = {'form':form_formate}
     return render(request=request,template_name='base/room_form.html',context=context)
 
 
