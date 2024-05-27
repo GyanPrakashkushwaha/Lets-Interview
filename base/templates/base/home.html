@@ -2,7 +2,7 @@
 
 {% block content %}
 
-<h1> Hello there this is HOME</h1>
+<!-- <h1> Hello there this is HOME</h1> -->
 
 <h2><a href="{% url 'createRoom' %}">Let's go to room✈🕊</a></h2>
 
@@ -35,6 +35,8 @@
         </div>
 
         <div>
+
+        <h5>{{rooms_cnt}} available rooms</h5>
 
         {% for dct in room %}
             <a href="{% url 'delete-room' dct.id %}">DELETE</a>

@@ -1,6 +1,7 @@
 from django.shortcuts import render , redirect
 from .models import Room , Topic
 from .forms import RoomForm
+from django.db.models import Q
 
 
 allRooms = [
@@ -17,15 +18,28 @@ def home(request):
     # Now because I am creating search functionality by clicking to the sidbar that's why i don't want the above code.
     q = request.GET.get('q') # fetching q value from html page.
     
+    # if q:
+    #     rooms = Room.objects.filter(topic__name__icontains=q) # Here I want to fetch topic that's why written topic that had in model. And want to query for q that's why given topic__name = q.
+    # else:
+    #     rooms = Room.objects.all()
+        
+    # to search by name or description or topic name, I have to use models Q method because the above code don't gonna work.
+    # The let's use & and or operations.
+    
     if q:
-        rooms = Room.objects.filter(topic__name__icontains=q) # Here I want to fetch topic that's why written topic that had in model. And want to query for q that's why given topic__name = q.
+        rooms = Room.objects.filter(
+            Q(topic__name__icontains=q) |
+            Q(name__icontains = q) |
+            Q(description__icontains = q))
     else:
         rooms = Room.objects.all()
     
     # topic for search.
     topics = Topic.objects.all()
+    
+    room_count = rooms.count()
 
-    dictToPass = {"room": rooms,'topics':topics}
+    dictToPass = {"room": rooms,'topics':topics,'rooms_cnt':room_count}
     
     return render(request=request,template_name="base/home.html",context=dictToPass)
 
