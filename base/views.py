@@ -1,5 +1,5 @@
 from django.shortcuts import render , redirect
-from .models import Room
+from .models import Room , Topic
 from .forms import RoomForm
 
 
@@ -13,7 +13,12 @@ allRooms = [
 def home(request):
     # data available in the dabase to get that we need to use this code.
     allRooms = Room.objects.all()
-    dictToPass = {"room": allRooms}
+    
+    # topic for search.
+    topics = Topic.objects.all()
+    
+    
+    dictToPass = {"room": allRooms,'topics':topics}
     
     return render(request=request,template_name="base/home.html",context=dictToPass)
 

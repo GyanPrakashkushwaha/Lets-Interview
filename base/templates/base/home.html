@@ -6,28 +6,55 @@
 
 <h2><a href="{% url 'createRoom' %}">Let's go to room✈🕊</a></h2>
 
+<style>
+    .home-container{
+        display: grid;
+        grid-template-columns: 1fr 3fr;
+    }
+</style>
 
 <hr>
 
-<div>
 
-    
-    {% for dct in room %}
+<div class="home-container">
 
-        <a href="{% url 'delete-room' dct.id %}">DELETE</a>
-        <a href="{% url 'update-room' dct.id  %}">edit</a>
-        <span><b>@{{dct.host.get_username}}</b></span>
-        <h3>{{dct.id}} --- <a href="{% url 'room' dct.id %}">{{dct.name}}</a></h3>
-        <small> {{dct.topic}} </small>
         <div>
-            <small> {{dct.description}} </small>
+            <h2>Browse topics</h2>
+            <br>
+
+            <div>
+                <h4><a href="{% url 'home' %}">All</a></h4>
+            </div>
+            {% for topic in topics %}
+
+            <div>
+                <h4><a href="{% url 'home' %}?={{topic.name}}">{{topic.name}}</a></h4>
+            </div>
+
+            {% endfor %}
         </div>
-        
-        <br>
-        <hr>
-        
-    {% endfor %}
+
+        <div>
+
+        {% for dct in room %}
+            <a href="{% url 'delete-room' dct.id %}">DELETE</a>
+            <a href="{% url 'update-room' dct.id  %}">edit</a>
+            <span><b>@{{dct.host.get_username}}</b></span>
+            <h3>{{dct.id}} --- <a href="{% url 'room' dct.id %}">{{dct.name}}</a></h3>
+            <small> {{dct.topic}} </small>
+            <div>
+                <small> {{dct.description}} </small>
+            </div>
+            
+            <br>
+            <hr>
+            
+        {% endfor %}
+
+    </div>
+
 
 </div>
+
 
 {% endblock content %}
