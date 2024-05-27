@@ -12,13 +12,20 @@ allRooms = [
 # Create your views here.
 def home(request):
     # data available in the dabase to get that we need to use this code.
-    allRooms = Room.objects.all()
+    # allRooms = Room.objects.all()
+    
+    # Now because I am creating search functionality by clicking to the sidbar that's why i don't want the above code.
+    q = request.GET.get('q') # fetching q value from html page.
+    
+    if q:
+        rooms = Room.objects.filter(topic__name__icontains=q) # Here I want to fetch topic that's why written topic that had in model. And want to query for q that's why given topic__name = q.
+    else:
+        rooms = Room.objects.all()
     
     # topic for search.
     topics = Topic.objects.all()
-    
-    
-    dictToPass = {"room": allRooms,'topics':topics}
+
+    dictToPass = {"room": rooms,'topics':topics}
     
     return render(request=request,template_name="base/home.html",context=dictToPass)
 
