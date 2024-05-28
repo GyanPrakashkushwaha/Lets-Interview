@@ -5,23 +5,19 @@ from django.db.models import Q
 from django.contrib.auth.models import User
 from django.contrib import messages
 
-
 def loginPage(request):
-    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-        
-        try:
-            user = User.objects.get(username=username)
-        except:
-            messages.error(request, "User does not exists.")
 
-            
-        
+        try:
+            user = User.objects.get(username)
+        except:
+            messages.error(request, "User does not exist.")
+            print(messages.error(request, "User does not exist."))
     
     context = {}
-    return render(request=request,template_name='base/signup_login.html',context=context)
+    return render(request, 'base/signup_login.html', context)
 
 # Create your views here.
 def home(request):
